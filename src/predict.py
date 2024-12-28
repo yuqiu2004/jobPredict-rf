@@ -24,5 +24,5 @@ def predict(path, encoder, params=''):
     # 解码预测结果
     y_pre_text = label_encoder.inverse_transform(y_pre)
     # 输出预测结果
-    # print("预测结果：", y_pre_text)
+    print("预测结果：", y_pre_text)
     return y_pre_text

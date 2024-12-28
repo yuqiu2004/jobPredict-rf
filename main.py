@@ -45,6 +45,6 @@ def predict_api():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8081, debug=True)
-    # load_and_test()
+    # app.run(host='0.0.0.0', port=8081, debug=True)
+    load_and_test()
     # train_and_save()

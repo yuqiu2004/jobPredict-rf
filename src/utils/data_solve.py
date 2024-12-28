@@ -2,13 +2,22 @@ import numpy as np
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from scipy.sparse import csr_matrix
+import joblib
+import os
 
 qualifications_mapping = {'b': 0, 'p': 1, 'm': 2}
 preference_mapping = {'female': 0, 'male': 1, 'both': 2}
+max_features=100
+tfidf_path = './models/tfidf_vectorizer.joblib'
 
-def tfidf_transform(column, max_features=100):
+def tfidf_transform(column):
     tfidf_vectorizer = TfidfVectorizer(max_features=max_features, stop_words='english')
-    tfidf_features = tfidf_vectorizer.fit_transform(column)
+    if os.path.exists(tfidf_path):
+        tfidf_vectorizer = joblib.load(tfidf_path)
+    else:
+        tfidf_vectorizer.fit(column)
+        joblib.dump(tfidf_vectorizer, tfidf_path)
+    tfidf_features = tfidf_vectorizer.transform(column)
     # 将稀疏矩阵转换为密集矩阵
     dense_matrix = tfidf_features.toarray()
     # 如果特征数不足 max_features，填充 0
