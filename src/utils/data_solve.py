@@ -22,13 +22,13 @@ def tfidf_transform(column):
     dense_matrix = tfidf_features.toarray()
     # 如果特征数不足 max_features，填充 0
     num_features = tfidf_features.shape[1]
-    if num_features < max_features:
-        # 填充 0
-        padding = max_features - num_features
-        dense_matrix = np.hstack([dense_matrix, np.zeros((dense_matrix.shape[0], padding))])
-    elif num_features > max_features:
-        # 如果特征数多于 max_features，裁剪掉多余的部分
-        dense_matrix = dense_matrix[:, :max_features]
+    # if num_features < max_features:
+    #     # 填充 0
+    #     padding = max_features - num_features
+    #     dense_matrix = np.hstack([dense_matrix, np.zeros((dense_matrix.shape[0], padding))])
+    # elif num_features > max_features:
+    #     # 如果特征数多于 max_features，裁剪掉多余的部分
+    #     dense_matrix = dense_matrix[:, :max_features]
     # 将填充后的矩阵转换为稀疏矩阵（保持稀疏矩阵的高效性）
     tfidf_features = csr_matrix(dense_matrix)
     # print(f'features: {tfidf_features}')
