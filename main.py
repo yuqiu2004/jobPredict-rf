@@ -24,6 +24,7 @@ def hello_world():
 def predict_api():
     try:
         data = request.get_json()
+        print(data)
         # 提取 JSON 数据中的各个字段
         qualification = data.get("qualification")
         salary = data.get("salary")
@@ -38,7 +39,7 @@ def predict_api():
         # 将提取的数据放入 user_input 列表
         user_input_list = [qualification, salary, company_size, preference, skills, responsibilities]
         result = predict(model_path, encoder_path, user_input_list)
-        print(result)
+        # print(result.tolist()[0])
         return jsonify({"job": result.tolist()[0]}), 200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
