@@ -19,9 +19,9 @@ def tfidf_transform(column):
         joblib.dump(tfidf_vectorizer, tfidf_path)
     tfidf_features = tfidf_vectorizer.transform(column)
     # 将稀疏矩阵转换为密集矩阵
-    dense_matrix = tfidf_features.toarray()
+    # dense_matrix = tfidf_features.toarray()
     # 如果特征数不足 max_features，填充 0
-    num_features = tfidf_features.shape[1]
+    # num_features = tfidf_features.shape[1]
     # if num_features < max_features:
     #     # 填充 0
     #     padding = max_features - num_features
@@ -30,7 +30,7 @@ def tfidf_transform(column):
     #     # 如果特征数多于 max_features，裁剪掉多余的部分
     #     dense_matrix = dense_matrix[:, :max_features]
     # 将填充后的矩阵转换为稀疏矩阵（保持稀疏矩阵的高效性）
-    tfidf_features = csr_matrix(dense_matrix)
+    # tfidf_features = csr_matrix(dense_matrix)
     # print(f'features: {tfidf_features}')
     tfidf_df = pd.DataFrame(tfidf_features.toarray(), columns=[f"{column.name}_tfidf_{i}" for i in range(tfidf_features.shape[1])])
     return tfidf_df
